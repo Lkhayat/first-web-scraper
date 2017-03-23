@@ -2,7 +2,7 @@ import csv
 import requests
 from BeautifulSoup import BeautifulSoup
 
-url = 'https://pressgallery.house.gov/member-data/demographics/women'
+url = "https://pressgallery.house.gov/member-data/demographics/women"
 response = requests.get(url)
 html = response.content
 
@@ -17,11 +17,11 @@ for row in table.findAll('tr')[1:-1]:
         if cell.text == '':
             list_of_cells.append(counter)
             counter += 1
-        elif cell.text != '' and cell.text[0] == '(':
+        elif cell.text!= '' and cell.text[0] == '(':
             party, state = cell.text.split(', ')
             list_of_cells.append(party.replace('(','').replace(')', ''))
-            list_of_cells.append(state)
-        else:
+            list_of_cells.append(state)            
+        else: 
             list_of_cells.append(cell.text)
     list_of_rows.append(list_of_cells)
 
