@@ -20,7 +20,7 @@ for month in months:
                 list_of_cells.append(link)
                 list_of_cells.append(cell.text)
             else:
-                list_of_cells.append(cell.te.text)
+                list_of_cells.append(cell.text)
         list_of_rows.append(list_of_cells)
 
 
