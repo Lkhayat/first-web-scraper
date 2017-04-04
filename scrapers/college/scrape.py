@@ -2,7 +2,7 @@ import csv
 import requests
 from BeautifulSoup import BeautifulSoup
 
-url = "http://www.tdcj.state.tx.us/death_row/dr_scheduled_executions.html"
+url = "https://columbian.gwu.edu/2015-2016"
 response = requests.get(url)
 html = response.content
 
@@ -17,15 +17,16 @@ for row in table.findAll('tr')[1:-1]:
         if cell.text == '':
             list_of_cells.append(counter)
             counter += 1
-        elif cell.text != '' and cell.text[0] == '(':
-            party, state = cell.text.split(', ')
-            list_of_cells.append(party.replace('(','').replace(')', ''))
-            list_of_cells.append(state)
-        else:
+        elif cell.text!= '' and cell.text[0] == '(':
+            year,department = cell.text.split(', ')
+            list_of_cells.append(year.replace('(','').replace(')', ''))
+            list_of_cells.append(department)            
+        else: 
             list_of_cells.append(cell.text)
     list_of_rows.append(list_of_cells)
 
-outfile = open("women.csv", "wb")
+outfile = open("college.csv", "wb")
 writer = csv.writer(outfile)
-writer.writerow(["scheduled_execution", "link", "last_name", "first_name", "TDJC_number","date_of_birth","race","date_received","county"])
+writer.writerow(["year", "department", "faculty", "sponsor", "title_of_project"])
 writer.writerows(list_of_rows)
+            
